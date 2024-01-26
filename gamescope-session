@@ -94,6 +94,9 @@ export STEAM_GAMESCOPE_DYNAMIC_FPSLIMITER=1
 # Support for gamescope tearing with GAMESCOPE_ALLOW_TEARING atom
 export STEAM_GAMESCOPE_HAS_TEARING_SUPPORT=1
 
+# We have gamma/degamma exponent support
+export STEAM_GAMESCOPE_COLOR_TOYS=1
+
 # We have NIS support
 export STEAM_GAMESCOPE_NIS_SUPPORTED=1
 
@@ -158,20 +161,8 @@ export XCURSOR_SCALE=256
 # Workaround for Steam login issue while Steam client change propagates out of Beta
 touch ~/.steam/root/config/SteamAppData.vdf || true
 
-board_name=$(cat /sys/class/dmi/id/board_name)
-if [[ $board_name = "Galileo" ]]; then
-	ui_background=/usr/share/plymouth/themes/steamos/steamos-galileo.png
+export STEAM_DISPLAY_REFRESH_LIMITS=30,165
 
-	# Set refresh rate range for the legacy refresh swtching UI
-	export STEAM_DISPLAY_REFRESH_LIMITS=45,90
-	export STEAM_GAMESCOPE_FORCE_HDR_DEFAULT=1
-	export STEAM_GAMESCOPE_FORCE_OUTPUT_TO_HDR10PQ_DEFAULT=1
-else
-	ui_background=/usr/share/plymouth/themes/steamos/steamos-jupiter.png
-
-	# Set refresh rate range for the legacy refresh swtching UI
-	export STEAM_DISPLAY_REFRESH_LIMITS=30,40,60,90,120,165
-fi
 export STEAM_UPDATEUI_PNG_BACKGROUND=$ui_background
 
 # We previously shipped custom boot animations alongside the OS as uioverrides
